@@ -27,9 +27,12 @@ async fn responses_to_command(
         Command::Price => match market.get_price("NEARUSDT") {
             Ok(symbol_price) => {
                 println!("{:#?}", &symbol_price);
+
+                let current_price = &symbol_price.price;
                 cx.answer(format!(
-                    "Current Account: {:.02}$ ",
-                    256. * &symbol_price.price
+                    "NEAR Price: {:.02}$\nCurrent Account: {:.02}$ ",
+                    current_price,
+                    256. * current_price
                 ))
                 .await?
             }
